@@ -4,9 +4,9 @@ public class Main {
     public static int bossHealth = 700;
     public static int bossDamage = 50;
     public static String bossDefenceType;
-    public static int[] heroesHealth = {280, 270, 250};
-    public static int[] heroesDamage = {10, 15, 20};
-    public static String[] heroesAttackType = {"Physical", "Magical", "Kinetic"};
+    public static int[] heroesHealth = {280, 270, 250, 230};
+    public static int[] heroesDamage = {10, 15, 20, 25};
+    public static String[] heroesAttackType = {"Physical", "Kinetic", "Medic", "Thor"};
     public static int roundNumber;
 
     public static void main(String[] args) {
@@ -17,19 +17,30 @@ public class Main {
         }
     }
 
+    public static void thorSkill() {
+       Random random = new Random();
+       boolean attack = random.nextBoolean();
+            if (heroesHealth[3] > 0) {
+                if (attack) {
+                    bossDamage = 0;
+                    System.out.println("Тор оглушил босса");
+                } else {
+                    bossDamage = 50;
+                }
+            }
+    }
+
     public static void medicHeal() {
-        for (int i=0; i < heroesHealth.length; i++){
-            if (i == 3){
+        for (int i = 0; i < heroesHealth.length; i++) {
+            if (i == 3) {
                 continue;
             }
-            if(heroesHealth[i] > 0 && heroesHealth[i] < 100 &&heroesHealth[i] > 0) {
-                heroesHealth[i] +=70;
+            if (heroesHealth[i] > 0 && heroesHealth[i] < 100) {
+                heroesHealth[i] += 70;
             }
-            System.out.println("Medic healed" + heroesAttackType[i]);
+            System.out.println("Medic healed: " + heroesAttackType[i]);
             break;
         }
-
-
     }
 
     public static void chooseBossDefence() {
@@ -45,6 +56,7 @@ public class Main {
         heroesHit();
         printStatistics();
         medicHeal();
+        thorSkill();
 
     }
 
